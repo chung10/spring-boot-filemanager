@@ -14,10 +14,8 @@
 * 移动端支持
 
 
-#[更多介绍请访问](http://shaofan.org/angular-filemanager/)
-
 #运行
-* 检出项目 <code class="code-normal">git clone https://git.oschina.net/alexyang/spring-boot-filemanager.git</code>
+* 检出项目 <code class="code-normal">https://github.com/chung10/spring-boot-filemanager.git</code>
 * 再项目根目录执行 <code class="code-normal">mvn spring-boot:run</code> 或运行<code class="code-normal">SpringBootFileManagerApplication</code>
 
 #编译angular-filemanager
