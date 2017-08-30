@@ -2,7 +2,6 @@ package org.shaofan;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.sun.corba.se.impl.orbutil.concurrent.Sync;
 import org.apache.commons.io.FileUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -38,8 +37,8 @@ import static org.shaofan.utils.ZipUtils.zipFiles;
 
 @SpringBootApplication
 @RestController
-@RequestMapping(value = "fileManager")
-//@RequestMapping("/fileManager")
+//@RequestMapping(value = "fileManager")
+@RequestMapping("/fileManager")
 public class SpringBootFileManagerApplication {
 
     public static void main(String[] args) {
@@ -50,7 +49,7 @@ public class SpringBootFileManagerApplication {
      *  文件管理根目录,此处为了方便采用Hard Code
      */
 //    public static String ROOT = "/Users/yanggang/Desktop/";
-    public static String ROOT = "f:";
+    public static String ROOT = "f:/";
 
     /**
      * 展示文件列表
@@ -60,12 +59,12 @@ public class SpringBootFileManagerApplication {
 
         try {
             // 需要显示的目录路径
+            System.out.println(("json:" + (json.toJSONString())));
             String path = json.getString("path");
 //            String path = "111_files/";
 //            String path = "Sync";
 //            String path = "logs";
 
-            System.out.println("path>>>>"+path);
             // 返回的结果集
             List<JSONObject> fileItems = new ArrayList<>();
 
@@ -79,11 +78,6 @@ public class SpringBootFileManagerApplication {
 
                     // 封装返回JSON数据
                     JSONObject fileItem = new JSONObject();
-                    System.out.println("pathObj.getFileName().startsWith(\".\"):"+(pathObj.getFileName().startsWith(".")));
-                    if(pathObj.getFileName().toString().startsWith(".")||pathObj.getFileName().toString().startsWith("$RECYCLE.")){
-                        continue;
-                    }
-                        System.out.println("pathObj.getFileName()>>>>"+pathObj.getFileName());
                     fileItem.put("name", pathObj.getFileName().toString());
                     fileItem.put("rights", org.shaofan.utils.FileUtils.getPermissions(pathObj)); // 文件权限
                     fileItem.put("date", dt.format(new Date(attrs.lastModifiedTime().toMillis())));
@@ -96,8 +90,10 @@ public class SpringBootFileManagerApplication {
             }
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("result", fileItems);
+            System.out.println(("jsonObject:" + jsonObject.toJSONString()));
             return jsonObject;
         } catch (Exception e) {
+            e.printStackTrace();
             return error(e.getMessage());
         }
     }

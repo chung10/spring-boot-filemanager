@@ -11,12 +11,6 @@ import java.nio.file.attribute.PosixFilePermission;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.util.Set;
 
-/**
- * FileUtils on spring-boot-filemanager
- *
- * @author <a href="mailto:akhuting@hotmail.com">Alex Yang</a>
- * @date 2016年08月25日 10:02
- */
 public class FileUtils {
 
     public static String getExtension(String fileName) {
